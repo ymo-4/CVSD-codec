@@ -47,15 +47,15 @@ int16_t *WavRead(const char* fileName, wav_param *param)
 
 	//Print WAV header
 	printf("WAV File Header read:\n");
-	printf("File Type: %s\n", header.chunkID);
-	printf("File Size: %ld\n", header.chunkSize);
-	printf("WAV Marker: %s\n", header.format);
-	printf("Format Name: %s\n", header.subchunk1ID);
-	printf("Format Length: %ld\n", header.subchunk1Size);
+	printf("File Type: %.4s\n", header.chunkID);
+	printf("File Size: %d\n", header.chunkSize);
+	printf("WAV Marker: %.4s\n", header.format);
+	printf("Format Name: %.4s\n", header.subchunk1ID);
+	printf("Format Length: %d\n", header.subchunk1Size);
 	printf("Format Type: %hd\n", header.audioFormat);
 	printf("Number of Channels: %hd\n", header.numChannels);
-	printf("Sample Rate: %ld\n", header.sampleRate);
-	printf("Sample Rate * Bits/Sample * Channels / 8: %ld\n", header.byteRate);
+	printf("Sample Rate: %d\n", header.sampleRate);
+	printf("Sample Rate * Bits/Sample * Channels / 8: %d\n", header.byteRate);
 	printf("Bits per Sample * Channels / 8.1: %hd\n", header.blockAlign);
 	printf("Bits per Sample: %hd\n", header.bitsPerSample);
 
@@ -69,7 +69,7 @@ int16_t *WavRead(const char* fileName, wav_param *param)
 	while (true)
 	{
 		fread(&chunk, sizeof(chunk), 1, fin);
-		printf("%c%c%c%c\t" "%li\n", chunk.ID[0], chunk.ID[1], chunk.ID[2], chunk.ID[3], chunk.size);
+		printf("%c%c%c%c\t" "%i\n", chunk.ID[0], chunk.ID[1], chunk.ID[2], chunk.ID[3], chunk.size);
 		if (*(unsigned int *)&chunk.ID == 0x61746164)
 			break;
 		//skip chunk data bytes
